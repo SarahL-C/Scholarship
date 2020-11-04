@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<title>Calculator</title>
+<body>
+
+
+<div class="table-responsive" Style = "line-height: 5vh">
+  <tbody>
+    <tr>
+      <td colspan="3"><input type = "text" id="display" Style = "font-size:5vh"></td>
+    </tr>
+  </tbody>
+</div>
+
+<div class="table-responsive" Style = "line-height: 5vh">
+  <table class="table">
+    <tbody>
+      
+      <tr>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(1)">1</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(2)">2</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(3)">3</button></td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(4)">4</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(5)">5</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(6)">6</button></td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(7)">7</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(8)">8</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(9)">9</button></td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(0)">0</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="operatorFunction(1)">+</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="operatorFunction(4)">x</button></td>
+        
+      </tr>
+      <tr>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="numberFunction(11)">.</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="operatorFunction(2)">-</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="operatorFunction(3)">/</button></td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="operatorFunction(0)">=</button></td>
+        <td><button class="btn btn-primary btn-block" Style = "line-height: 10vh; font-size:7vh" onclick="clearScreen()">C</button></td>
+      </tr>
+  </table> 
+</div>
+
+</html>   
+
+<script>
+  var keepTrackOfOperator = -1;
+  var operatorPress;
+  var buttonPress;
+  function numberFunction(buttonPress) {
+    console.log(buttonPress);
+    buttonPressString = buttonPress.toString();
+    displayValue = document.getElementById("display").value;
+
+    if (buttonPress == 11) {
+
+      if (!displayValue.includes('.')) {
+        console.log("yay no period");
+        document.getElementById("display").value = displayValue + ".";
+      }
+
+      else {
+        //do nothing
+      }
+    }
+
+    else {    
+      console.log(buttonPressString);
+      console.log(displayValue);
+
+      if (displayValue == "") {
+        console.log("display value is nothing");
+        document.getElementById("display").value = buttonPressString;
+      }
+
+      else {
+        console.log("else condition");
+        document.getElementById("display").value = displayValue + buttonPressString;
+      }
+    }
+
+  }
+  function clearScreen() {
+    document.getElementById("display").value = "";
+    keepTrackOfOperator == -1;
+  }
+  function operatorFunction(operatorPress) {  // = 0, + 1, - 2, / 3, x 4
+    displayDouble = parseFloat(document.getElementById("display").value);
+    console.log("operatorPress " + operatorPress);
+    clearScreen();
+
+    if (operatorPress == 1) {
+
+      if (keepTrackOfOperator == -1) {
+        keepTrackResult = displayDouble;
+        clearScreen();
+      }
+
+      else if (keepTrackOfOperator == 1) {
+         keepTrackResult = keepTrackResult + displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 2) {
+         keepTrackResult = keepTrackResult - displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 3) {
+         keepTrackResult = keepTrackResult / displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 4) {
+         keepTrackResult = keepTrackResult * displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+      keepTrackOfOperator = 1;
+    }
+
+    if (operatorPress == 2) {
+
+      if (keepTrackOfOperator == -1) {
+        keepTrackResult = displayDouble;
+        clearScreen();
+      }
+
+      else if (keepTrackOfOperator == 1) {
+         keepTrackResult = keepTrackResult + displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 2) {
+         keepTrackResult = keepTrackResult - displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 3) {
+         keepTrackResult = keepTrackResult / displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 4) {
+         keepTrackResult = keepTrackResult * displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+      keepTrackOfOperator = 2;
+    }
+
+    if (operatorPress == 3) {
+
+      if (keepTrackOfOperator == -1) {
+        keepTrackResult = displayDouble;
+        clearScreen();
+      }
+
+      else if (keepTrackOfOperator == 1) {
+         keepTrackResult = keepTrackResult + displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 2) {
+         keepTrackResult = keepTrackResult - displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 3) {
+         keepTrackResult = keepTrackResult / displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 4) {
+         keepTrackResult = keepTrackResult * displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+      keepTrackOfOperator = 3;
+    }
+
+    if (operatorPress == 4) {
+
+      if (keepTrackOfOperator == -1) {
+        keepTrackResult = displayDouble;
+        clearScreen();
+      }
+
+      else if (keepTrackOfOperator == 1) {
+         keepTrackResult = keepTrackResult + displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 2) {
+         keepTrackResult = keepTrackResult - displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 3) {
+         keepTrackResult = keepTrackResult / displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 4) {
+         keepTrackResult = keepTrackResult * displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+      keepTrackOfOperator = 4;
+    }
+
+    if (operatorPress == 0) {
+
+      if (keepTrackOfOperator == -1) {
+        keepTrackResult = displayDouble;
+        clearScreen();
+      }
+
+      else if (keepTrackOfOperator == 1) {
+         keepTrackResult = keepTrackResult + displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 2) {
+         keepTrackResult = keepTrackResult - displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 3) {
+         keepTrackResult = keepTrackResult / displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+
+      else if (keepTrackOfOperator == 4) {
+         keepTrackResult = keepTrackResult * displayDouble;
+         console.log("keepTrackResult is " + keepTrackResult);
+      }
+      resultString = keepTrackResult.toString();
+      keepTrackOfOperator = -1;
+      document.getElementById("display").value = resultString;    
+    }
+
+  }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
